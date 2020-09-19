@@ -61,3 +61,15 @@ pulse_df = read_sas("./data_import_examples/public_pulse_data.sas7bdat")
 pulse_df
 ```
 
+## comparision with Base R
+
+what about 'read.csv' 
+
+## Exporting Data
+
+export the mlb sub table
+```{r}
+mlb_df
+write_csv(mlb_df,"./data_import_examples/mlb_practice.csv")
+```
+

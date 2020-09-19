@@ -218,3 +218,35 @@ pulse_df
     ##  9 10091  76.0 male             0            3            4            0
     ## 10 10092  74.2 female          10            2           11            6
     ## # … with 1,077 more rows
+
+## comparision with Base R
+
+what about ‘read.csv’
+
+## Exporting Data
+
+export the mlb sub table
+
+``` r
+mlb_df
+```
+
+    ## # A tibble: 30 x 12
+    ##    team   runs at_bats  hits homeruns bat_avg strikeouts stolen_bases  wins
+    ##    <chr> <dbl>   <dbl> <dbl>    <dbl>   <dbl>      <dbl>        <dbl> <dbl>
+    ##  1 Texa…   855    5659  1599      210   0.283        930          143    96
+    ##  2 Bost…   875    5710  1600      203   0.28        1108          102    90
+    ##  3 Detr…   787    5563  1540      169   0.277       1143           49    95
+    ##  4 Kans…   730    5672  1560      129   0.275       1006          153    71
+    ##  5 St. …   762    5532  1513      162   0.273        978           57    90
+    ##  6 New …   718    5600  1477      108   0.264       1085          130    77
+    ##  7 New …   867    5518  1452      222   0.263       1138          147    97
+    ##  8 Milw…   721    5447  1422      185   0.261       1083           94    96
+    ##  9 Colo…   735    5544  1429      163   0.258       1201          118    73
+    ## 10 Hous…   615    5598  1442       95   0.258       1164          118    56
+    ## # … with 20 more rows, and 3 more variables: new_onbase <dbl>, new_slug <dbl>,
+    ## #   new_obs <dbl>
+
+``` r
+write_csv(mlb_df,"./data_import_examples/mlb_practice.csv")
+```
