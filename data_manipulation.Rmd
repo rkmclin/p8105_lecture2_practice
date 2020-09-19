@@ -80,3 +80,19 @@ mutate(
 arrange(litters_df, pups_born_alive)
 ```
 
+## %>% pipeline
+
+
+USE THE PIPE OPERATOR
+shift command m --> and then
+
+```{r}
+litters_df = 
+  read_csv("./data_import_examples/FAS_litters.csv") %>% 
+  janitor::clean_names() %>% 
+  select(-pups_survive) %>% 
+  mutate(wt_gain = gd18_weight - gd0_weight) %>% 
+  drop_na(gd0_weight)
+
+```
+
