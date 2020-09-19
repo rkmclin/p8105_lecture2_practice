@@ -41,3 +41,26 @@ select(litters_df, GROUP = group, LITTER_number = litter_number)
 rename(litters_df,GROUP = group, LITTER_number = litter_number)
 ```
 
+## Filter functions
+
+```{r}
+filter(litters_df, gd0_weight < 22)
+```
+
+```{r}
+filter(litters_df, gd_of_birth == 20)
+```
+
+```{r}
+filter(litters_df, !(gd_of_birth == 20))
+```
+```{r}
+filter(litters_df, gd_of_birth == 20, gd0_weight > 22)
+```
+
+what about character variables, and using the statement either or?
+
+```{r}
+filter(litters_df, group %in% c("Con7","Mod8"))
+```
+
