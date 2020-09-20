@@ -5,14 +5,14 @@ Tidy Data
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ── tidyverse 1.3.0 ──
+    ## ── Attaching packages ──────────────────────────── tidyverse 1.3.0 ──
 
     ## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
     ## ✓ tibble  3.0.1     ✓ dplyr   1.0.0
     ## ✓ tidyr   1.1.0     ✓ stringr 1.4.0
     ## ✓ readr   1.3.1     ✓ forcats 0.5.0
 
-    ## ── Conflicts ───── tidyverse_conflicts() ──
+    ## ── Conflicts ─────────────────────────────── tidyverse_conflicts() ──
     ## x dplyr::filter() masks stats::filter()
     ## x dplyr::lag()    masks stats::lag()
 
@@ -115,6 +115,8 @@ janitor::clean_names() %>%
   )
 ```
 
+final result
+
 ``` r
 lotr_tidy
 ```
@@ -140,3 +142,53 @@ lotr_tidy
     ## 16 return_king     Hobbit male    2673
     ## 17 return_king     Man    female   268
     ## 18 return_king     Man    male    2459
+
+## Joining data sets
+
+import the FAS data sets
+
+``` r
+pups_df = 
+  read_csv("./data/FAS_pups.csv") %>% 
+  janitor::clean_names() %>% 
+  mutate(sex = recode(sex, `1` = "male", `2` = "female"))
+```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   `Litter Number` = col_character(),
+    ##   Sex = col_double(),
+    ##   `PD ears` = col_double(),
+    ##   `PD eyes` = col_double(),
+    ##   `PD pivot` = col_double(),
+    ##   `PD walk` = col_double()
+    ## )
+
+``` r
+litters_df = 
+  read_csv("./data/FAS_litters.csv") %>% 
+  janitor::clean_names() %>% 
+  relocate(litter_number) %>% 
+  separate(group, into = c("dose","day_of_tx"), sep = 3)
+```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   Group = col_character(),
+    ##   `Litter Number` = col_character(),
+    ##   `GD0 weight` = col_double(),
+    ##   `GD18 weight` = col_double(),
+    ##   `GD of Birth` = col_double(),
+    ##   `Pups born alive` = col_double(),
+    ##   `Pups dead @ birth` = col_double(),
+    ##   `Pups survive` = col_double()
+    ## )
+
+Going to join the data sets
+
+``` r
+fas_df = 
+  left_join(pups_df, litters_df, by = "litter_number" ) %>% 
+  arrange(litter_number) %>% 
+  relocate(litter_number, dose, day_of_tx)
+```
